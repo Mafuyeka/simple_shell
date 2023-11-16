@@ -110,7 +110,7 @@ int (*func)(info_t *);
 
 builtin_table;
 
-/* t_shloop.c */
+/* t_shell_loop.c */
 int t_hsh(info_t *, char **);
 int t_find_builtin(info_t *);
 void t_find_cmd(info_t *);
