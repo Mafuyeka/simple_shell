@@ -10,16 +10,16 @@
 char *t_get_history_file(info_t *info)
 {
 char *buf, *dir;
-dir = _getenv(info, "HOME=");
+dir = t_getenv(info, "HOME=");
 if (!dir)
 return (NULL);
 
-buf = malloc(sizeof(char) * (_strlen(dir) + _strlen(HIST_FILE) + 2));
+buf = malloc(sizeof(char) * (t_strlen(dir) + _strlen(HIST_FILE) + 2));
 if (!buf)
 return (NULL);
 buf[0] = 0;
-_strcpy(buf, dir);
-_strcat(buf, "/");
+t_strcpy(buf, dir);
+t_strcat(buf, "/");
 _strcat(buf, HIST_FILE);
 return (buf);
 }
@@ -32,7 +32,7 @@ return (buf);
 int t_write_history(info_t *info)
 {
 ssize_t fd;
-char *filename = get_history_file(info);
+char *filename = t_get_history_file(info);
 list_t *node = NULL;
 if (!filename)
 return (-1);
@@ -42,8 +42,8 @@ if (fd == -1)
 return (-1);
 for (node = info->history; node; node = node->next)
 {
-_putsfd(node->str, fd);
-_putfd('\n', fd);
+t_putsfd(node->str, fd);
+t_putfd('\n', fd);
 }
 _putfd(BUF_FLUSH, fd);
 close(fd);
@@ -84,7 +84,7 @@ for (i = 0; i < fsize; i++)
 if (buf[i] == '\n')
 {
 buf[i] = 0;
-build_history_list(info, buf + last, linecount++);
+t_build_history_list(info, buf + last, linecount++);
 last = i + 1;
 }
 if (last != i)
@@ -92,8 +92,8 @@ build_history_list(info, buf + last, linecount++);
 free(buf);
 info->histcount = linecount;
 while (info->histcount-- >= HIST_MAX)
-delete_node_at_index(&(info->history), 0);
-renumber_history(info);
+t_delete_node_at_index(&(info->history), 0);
+t_renumber_history(info);
 return (info->histcount);
 }
 /**
@@ -109,7 +109,7 @@ int t_build_history_list(info_t *info, char *buf, int linecount)
 list_t *node = NULL;
 if (info->history)
 node = info->history;
-add_node_end(&node, buf, linecount);
+t_add_node_end(&node, buf, linecount);
 if (!info->history)
 info->history = node;
 return (0);
