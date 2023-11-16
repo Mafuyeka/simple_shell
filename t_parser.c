@@ -67,10 +67,10 @@ t_strcat(path, cmd);
 
 else
 {
-_strcat(path, "/");
+t_strcat(path, "/");
 _strcat(path, cmd);
 }
-if (is_cmd(info, path))
+if (t_is_cmd(info, path))
 return (path);
 if (!pathstr[i])
 break;
