@@ -24,12 +24,12 @@ builtin_ret = t_find_builtin(info);
 if (builtin_ret == -1)
 t_find_cmd(info);
 }
-else if (interactive(info))
+else if (t_interactive(info))
 t_putchar('\n');
 t_free_info(info, 0);
 }
 t_write_history(info);
-free_info(info, 1);
+t_free_info(info, 1);
 if (!interactive(info) && info->status)
 exit(info->status);
 if (builtin_ret == -2)
@@ -53,13 +53,13 @@ int t_find_builtin(info_t *info)
 int i, built_in_ret = -1;
 builtin_table builtintbl[] = {
 {"exit", t_myexit},
-{"env", _myenv},
-{"help", _myhelp},
-{"history", _myhistory},
-{"setenv", _mysetenv},
-{"unsetenv", _myunsetenv},
-{"cd", _mycd},
-{"alias", _myalias},
+{"env", t_myenv},
+{"help", t_myhelp},
+{"history", t_myhistory},
+{"setenv", t_mysetenv},
+{"unsetenv", t_myunsetenv},
+{"cd", t_mycd},
+{"alias", t_myalias},
 {NULL, NULL}
 };
 for (i = 0; builtintbl[i].type; i++)
@@ -88,27 +88,27 @@ info->line_count++;
 info->linecount_flag = 0;
 }
 for (i = 0, k = 0; info->arg[i]; i++)
-if (!is_delim(info->arg[i], " \t\n"))
+if (!t_is_delim(info->arg[i], " \t\n"))
 k++;
 if (!k)
 return;
-path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+path = t_find_path(info, t_getenv(info, "PATH="), info->argv[0]);
 if (path)
 {
 info->path = path;
-fork_cmd(info);
+t_fork_cmd(info);
 }
 else
 {
 if ((interactive(info) || _getenv(info, "PATH=")
 
-|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
+|| info->argv[0][0] == '/') && t_is_cmd(info, info->argv[0]))
 
 fork_cmd(info);
 else if (*(info->arg) != '\n')
 {
 info->status = 127;
-print_error(info, "not found\n");
+t_print_error(info, "not found\n");
 }
 }
 }
@@ -130,7 +130,7 @@ return;
 }
 if (child_pid == 0)
 {
-if (execve(info->path, info->argv, get_environ(info)) == -1)
+if (execve(info->path, info->argv, t_get_environ(int info)) == -1)
 {
 free_info(info, 1);
 if (errno == EACCES)
