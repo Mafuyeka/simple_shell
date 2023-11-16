@@ -9,7 +9,7 @@ char **t_getenviron(info_t *info)
 {
 if (!info->environ || info->env_changed)
 {
-info->environ = list_to_strings(info->env);
+info->environ = t_list_to_strings(info->env);
 info->env_changed = 0;
 }
 return (info->environ);
@@ -56,12 +56,12 @@ list_t *node;
 char *p;
 if (!var || !value)
 return (0);
-buf = malloc(t_strlen(var) + _strlen(value) + 2);
+buf = malloc(t_strlen(var) + t_strlen(value) + 2);
 if (!buf)
 return (1);
 t_strcpy(buf, var);
 t_strcat(buf, "=");
-_strcat(buf, value);
+t_strcat(buf, value);
 node = info->env;
 while (node)
 {
