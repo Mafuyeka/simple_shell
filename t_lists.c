@@ -48,12 +48,12 @@ node = *head;
 new_node = malloc(sizeof(list_t));
 if (!new_node)
 return (NULL);
-_memset((void *)new_node, 0, sizeof(list_t));
+t_memset((void *)new_node, 0, sizeof(list_t));
 new_node->num = num;
 if (str)
 {
 
-new_node->str = _strdup(str);
+new_node->str = t_strdup(str);
 if (!new_node->str)
 {
 free(new_node);
@@ -82,7 +82,7 @@ size_t i = 0;
 while (h)
 {
 t_puts(h->str ? h->str : "(nil)");
-_puts("\n");
+t_puts("\n");
 h = h->next;
 i++;
 }
