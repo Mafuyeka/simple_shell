@@ -16,11 +16,11 @@ return (NULL);
 new_head = malloc(sizeof(list_t));
 if (!new_head)
 return (NULL);
-_memset((void *)new_head, 0, sizeof(list_t));
+t_memset((void *)new_head, 0, sizeof(list_t));
 new_head->num = num;
 if (str)
 {
-new_head->str = _strdup(str);
+new_head->str = t_strdup(str);
 if (!new_head->str)
 {
 free(new_head);
@@ -81,7 +81,7 @@ size_t t_print_list_str(const list_t *h)
 size_t i = 0;
 while (h)
 {
-_puts(h->str ? h->str : "(nil)");
+t_puts(h->str ? h->str : "(nil)");
 _puts("\n");
 h = h->next;
 i++;
@@ -122,7 +122,6 @@ return (1);
 i++;
 prev_node = node;
 node = node->next;
-}
 return (0);
 }
 /**
