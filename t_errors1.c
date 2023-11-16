@@ -41,7 +41,7 @@ void t_print_error(info_t *info, char *estr)
 	t_eputs(": ");
 	t_print_d(info->line_count, STDERR_FILENO);
 	t_eputs(": ");
-	_eputs(info->argv[0]);
+	t_eputs(info->argv[0]);
 	_eputs(": ");
 	_eputs(estr);
 }
