@@ -68,7 +68,7 @@ t_strcat(path, cmd);
 else
 {
 t_strcat(path, "/");
-_strcat(path, cmd);
+t_strcat(path, cmd);
 }
 if (t_is_cmd(info, path))
 return (path);
