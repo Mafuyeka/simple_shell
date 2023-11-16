@@ -12,23 +12,23 @@ ssize_t r = 0;
 int builtin_ret = 0;
 while (r != -1 && builtin_ret != -2)
 {
-clear_info(info);
-if (interactive(info))
-_puts("$ ");
-_eputchar(BUF_FLUSH);
-r = get_input(info);
+t_clear_info(info);
+if (t_interactive(info))
+t_puts("$ ");
+t_eputchar(BUF_FLUSH);
+r = t_get_input(info);
 if (r != -1)
 {
-set_info(info, av);
-builtin_ret = find_builtin(info);
+t_set_info(info, av);
+builtin_ret = t_find_builtin(info);
 if (builtin_ret == -1)
-find_cmd(info);
+t_find_cmd(info);
 }
 else if (interactive(info))
-_putchar('\n');
-free_info(info, 0);
+t_putchar('\n');
+t_free_info(info, 0);
 }
-write_history(info);
+t_write_history(info);
 free_info(info, 1);
 if (!interactive(info) && info->status)
 exit(info->status);
@@ -52,7 +52,7 @@ int t_find_builtin(info_t *info)
 {
 int i, built_in_ret = -1;
 builtin_table builtintbl[] = {
-{"exit", _myexit},
+{"exit", t_myexit},
 {"env", _myenv},
 {"help", _myhelp},
 {"history", _myhistory},
