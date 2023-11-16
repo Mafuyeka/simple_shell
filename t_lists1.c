@@ -64,8 +64,8 @@ while (h)
 {
 t_puts(t_convert_number(h->num, 10, 0));
 t_putchar(':');
-_putchar(' ');
-_puts(h->str ? h->str : "(nil)");
+t_putchar(' ');
+t_puts(h->str ? h->str : "(nil)");
 _puts("\n");
 h = h->next;
 i++;
