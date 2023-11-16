@@ -14,13 +14,13 @@ dir = t_getenv(info, "HOME=");
 if (!dir)
 return (NULL);
 
-buf = malloc(sizeof(char) * (t_strlen(dir) + _strlen(HIST_FILE) + 2));
+buf = malloc(sizeof(char) * (t_strlen(dir) + t_strlen(HIST_FILE) + 2));
 if (!buf)
 return (NULL);
 buf[0] = 0;
 t_strcpy(buf, dir);
 t_strcat(buf, "/");
-_strcat(buf, HIST_FILE);
+t_strcat(buf, HIST_FILE);
 return (buf);
 }
 /**
@@ -45,7 +45,7 @@ for (node = info->history; node; node = node->next)
 t_putsfd(node->str, fd);
 t_putfd('\n', fd);
 }
-_putfd(BUF_FLUSH, fd);
+t_putfd(BUF_FLUSH, fd);
 close(fd);
 return (1);
 }
@@ -61,7 +61,7 @@ int i, last = 0, linecount = 0;
 
 ssize_t fd, rdlen, fsize = 0;
 struct stat st;
-char *buf = NULL, *filename = get_history_file(info);
+char *buf = NULL, *filename = t_get_history_file(info);
 if (!filename)
 return (0);
 fd = open(filename, O_RDONLY);
@@ -88,7 +88,7 @@ t_build_history_list(info, buf + last, linecount++);
 last = i + 1;
 }
 if (last != i)
-build_history_list(info, buf + last, linecount++);
+t_build_history_list(info, buf + last, linecount++);
 free(buf);
 info->histcount = linecount;
 while (info->histcount-- >= HIST_MAX)
