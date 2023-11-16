@@ -65,7 +65,7 @@ t_strcat(buf, value);
 node = info->env;
 while (node)
 {
-p = starts_with(node->str, var);
+p = t_starts_with(node->str, var);
 if (p && *p == '=')
 {
 free(node->str);
