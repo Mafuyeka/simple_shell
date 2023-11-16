@@ -125,13 +125,13 @@ continue;
 node = t_node_starts_with(info->env, &info->argv[i][1], '=');
 if (node)
 {
-replace_string(&(info->argv[i]),
+t_replace_string(&(info->argv[i]),
 
 t_strdup(t_strchr(node->str, '=') + 1));
 
 continue;
 }
-replace_string(&info->argv[i], _strdup(""));
+t_replace_string(&info->argv[i], t_strdup(""));
 }
 return (0);
 }
