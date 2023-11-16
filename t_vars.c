@@ -110,7 +110,7 @@ if (!t_strcmp(info->argv[i], "$?"))
 {
 t_replace_string(&(info->argv[i]),
 
-int t_strdup(t_convert_number(info->status, 10, 0)));
+t_strdup(t_convert_number(info->status, 10, 0)));
 
 continue;
 }
