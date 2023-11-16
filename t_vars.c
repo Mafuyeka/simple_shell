@@ -78,14 +78,14 @@ char *p;
 for (i = 0; i < 10; i++)
 
 {
-node = node_starts_with(info->alias, info->argv[0], '=');
+node = t_node_starts_with(info->alias, info->argv[0], '=');
 if (!node)
 return (0);
 free(info->argv[0]);
-p = _strchr(node->str, '=');
+p = t_strchr(node->str, '=');
 if (!p)
 return (0);
-p = _strdup(p + 1);
+p = t_strdup(p + 1);
 if (!p)
 return (0);
 info->argv[0] = p;
@@ -106,11 +106,11 @@ for (i = 0; info->argv[i]; i++)
 {
 if (info->argv[i][0] != '$' || !info->argv[i][1])
 continue;
-if (!_strcmp(info->argv[i], "$?"))
+if (!t_strcmp(info->argv[i], "$?"))
 {
-replace_string(&(info->argv[i]),
+t_replace_string(&(info->argv[i]),
 
-_strdup(convert_number(info->status, 10, 0)));
+_strdup(t_convert_number(info->status, 10, 0)));
 
 continue;
 }
