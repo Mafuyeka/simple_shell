@@ -100,7 +100,7 @@ t_fork_cmd(info);
 }
 else
 {
-if ((interactive(info) || t_getenv(info, "PATH=")
+if ((t_interactive(info) || t_getenv(info, "PATH=")
 
 || info->argv[0][0] == '/') && t_is_cmd(info, info->argv[0]))
 
