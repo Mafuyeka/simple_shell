@@ -54,7 +54,7 @@ if (!str)
 return;
 while (str[i] != '\0')
 {
-_putchar(str[i]);
+t_putchar(str[i]);
 i++;
 }
 }
