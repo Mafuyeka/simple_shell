@@ -66,7 +66,7 @@ t_puts(t_convert_number(h->num, 10, 0));
 t_putchar(':');
 t_putchar(' ');
 t_puts(h->str ? h->str : "(nil)");
-_puts("\n");
+t_puts("\n");
 h = h->next;
 i++;
 }
