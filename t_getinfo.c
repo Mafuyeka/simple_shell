@@ -57,7 +57,7 @@ t_free_list(&(info->env));
 if (info->history)
 t_free_list(&(info->history));
 if (info->alias)
-free_list(&(info->alias));
+t_free_list(&(info->alias));
 free(info->environ);
 info->environ = NULL;
 free((void **)info->cmd_buf);
