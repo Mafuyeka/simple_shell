@@ -29,7 +29,7 @@ for (i = 0, j = 0; j < numwords; j++)
 while (t_is_delim(str[i], d))
 i++;
 k = 0;
-while (!is_delim(str[i + k], d) && str[i + k])
+while (!t_is_delim(str[i + k], d) && str[i + k])
 k++;
 s[j] = malloc((k + 1) * sizeof(char));
 if (!s[j])
