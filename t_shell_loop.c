@@ -30,7 +30,7 @@ t_free_info(info, 0);
 }
 t_write_history(info);
 t_free_info(info, 1);
-if (!interactive(info) && info->status)
+if (!t_interactive(info) && info->status)
 exit(info->status);
 if (builtin_ret == -2)
 {
@@ -63,7 +63,7 @@ builtin_table builtintbl[] = {
 {NULL, NULL}
 };
 for (i = 0; builtintbl[i].type; i++)
-if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
+if (t_strcmp(info->argv[0], builtintbl[i].type) == 0)
 {
 info->line_count++;
 built_in_ret = builtintbl[i].func(info);
@@ -100,11 +100,11 @@ t_fork_cmd(info);
 }
 else
 {
-if ((interactive(info) || _getenv(info, "PATH=")
+if ((interactive(info) || t_getenv(info, "PATH=")
 
 || info->argv[0][0] == '/') && t_is_cmd(info, info->argv[0]))
 
-fork_cmd(info);
+t_fork_cmd(info);
 else if (*(info->arg) != '\n')
 {
 info->status = 127;
@@ -132,7 +132,7 @@ if (child_pid == 0)
 {
 if (execve(info->path, info->argv, t_get_environ(int info)) == -1)
 {
-free_info(info, 1);
+t_free_info(info, 1);
 if (errno == EACCES)
 exit(126);
 exit(1);
@@ -147,7 +147,7 @@ if (WIFEXITED(info->status))
 {
 info->status = WEXITSTATUS(info->status);
 if (info->status == 126)
-print_error(info, "Permission denied\n");
+t_print_error(info, "Permission denied\n");
 }
 }
 }
