@@ -26,7 +26,7 @@ return (i);
 char **t_list_to_strings(list_t *head)
 {
 list_t *node = head;
-size_t i = list_len(head), j;
+size_t i = t_list_len(head), j;
 char **strs;
 char *str;
 if (!head || !i)
@@ -37,7 +37,7 @@ if (!strs)
 return (NULL);
 for (i = 0; node; node = node->next, i++)
 {
-str = malloc(_strlen(node->str) + 1);
+str = malloc(t_strlen(node->str) + 1);
 if (!str)
 {
 for (j = 0; j < i; j++)
@@ -45,7 +45,7 @@ free(strs[j]);
 free(strs);
 return (NULL);
 }
-str = _strcpy(str, node->str);
+str = t_strcpy(str, node->str);
 strs[i] = str;
 }
 strs[i] = NULL;
@@ -62,8 +62,8 @@ size_t t_print_list(const list_t *h)
 size_t i = 0;
 while (h)
 {
-_puts(convert_number(h->num, 10, 0));
-_putchar(':');
+t_puts(t_convert_number(h->num, 10, 0));
+t_putchar(':');
 _putchar(' ');
 _puts(h->str ? h->str : "(nil)");
 _puts("\n");
@@ -85,7 +85,7 @@ list_t *t_node_starts_with(list_t *node, char *prefix, char c)
 char *p = NULL;
 while (node)
 {
-p = starts_with(node->str, prefix);
+p = t_starts_with(node->str, prefix);
 if (p && ((c == -1) || (*p == c)))
 return (node);
 node = node->next;
