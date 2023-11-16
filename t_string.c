@@ -24,8 +24,6 @@ return (i);
  */
 int t_strcmp(char *s1, char *s2)
 {
-int _strcmp(char *s1, char *s2)
-{
 while (*s1 && *s2)
 {
 if (*s1 != *s2)
@@ -45,7 +43,7 @@ return (*s1 < *s2 ? -1 : 1);
  *
  * Return:  nextt char of haystaack or NULL
  */
-char *t_starts_with(const char *haystack, const char *needle)
+char t_starts_with(const char *haystack, const char *needle)
 {
 while (*needle)
 if (*needle++ != *haystack++)
@@ -59,7 +57,7 @@ return ((char *)haystack);
  *
  * Return: pointeer buffers destineatione
  */
-char *t_strcat(char *dest, char *src)
+char t_strcat(char *dest, char *src)
 {
 char *ret = dest;
 while (*dest)
