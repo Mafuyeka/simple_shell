@@ -55,10 +55,10 @@ free(info->arg);
 if (info->env)
 t_free_list(&(info->env));
 if (info->history)
-free_list(&(info->history));
+t_free_list(&(info->history));
 if (info->alias)
 free_list(&(info->alias));
-ffree(info->environ);
+free(info->environ);
 info->environ = NULL;
 free((void **)info->cmd_buf);
 if (info->readfd > 2)
