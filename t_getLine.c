@@ -136,7 +136,7 @@ return (s);
 void t_sigintHandler(__attribute__((unused))int sig_num)
 {
 t_puts("\n");
-_puts("$ ");
-_putchar(BUF_FLUSH);
+t_puts("$ ");
+t_putchar(BUF_FLUSH);
 }
 
