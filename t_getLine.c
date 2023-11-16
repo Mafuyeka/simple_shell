@@ -17,7 +17,7 @@ if (!*len) /* if nothing left in the buffer, fill it */
 /*bfree((void **)info->cmd_buf);*/
 free(*buf);
 *buf = NULL;
-signal(SIGINT, sigintHandler);
+signal(SIGINT, t_sigintHandler);
 
 #if USE_GETLINE
 
@@ -25,7 +25,7 @@ r = getline(buf, &len_p, stdin);
 
 #else
 
-r = _getline(info, buf, &len_p);
+r = t_getline(info, buf, &len_p);
 
 #endif
 
@@ -37,8 +37,8 @@ if ((*buf)[r - 1] == '\n')
 r--;
 }
 info->linecount_flag = 1;
-remove_comments(*buf);
-build_history_list(info, *buf, info->histcount++);
+t_remove_comments(*buf);
+t_build_history_list(info, *buf, info->histcount++);
 /* if (_strchr(*buf, ';')) is this a command chain? */
 {
 *len = r;
@@ -60,18 +60,18 @@ static char *buf; /* the ';' command chain buffer */
 static size_t i, j, len;
 ssize_t r = 0;
 char **buf_p = &(info->arg), *p;
-_putchar(BUF_FLUSH);
-r = input_buf(info, &buf, &len);
+t_putchar(BUF_FLUSH);
+r = t_input_buf(info, &buf, &len);
 if (r == -1) /* EOF */
 return (-1);
 if (len) /* we have commands left in the chain buffer */
 {
 j = i; /* init new iterator to current buf position */
 p = buf + i; /* get pointer for return */
-check_chain(info, buf, &j, i, len);
+t_check_chain(info, buf, &j, i, len);
 while (j < len) /* iterate to semicolon or end */
 {
-if (is_chain(info, buf, &j))
+if (t_is_chain(info, buf, &j))
 break;
 j++;
 }
@@ -82,7 +82,7 @@ i = len = 0; /* reset position and length */
 info->cmd_buf_type = CMD_NORM;
 }
 *buf_p = p; /* pass back pointer to current command position */
-return (_strlen(p)); /* return length of current command */
+return (t_strlen(p)); /* return length of current command */
 }
 *buf_p = buf; /* else not a chain, pass back buffer from _getline() */
 return (r); /* return length of buffer from _getline() */
@@ -110,15 +110,15 @@ i = len = 0;
 r = read_buf(info, buf, &len);
 if (r == -1 || (r == 0 && len == 0))
 return (-1);
-c = _strchr(buf + i, '\n');
+c = t_strchr(buf + i, '\n');
 k = c ? 1 + (unsigned int)(c - buf) : len;
-new_p = _realloc(p, s, s ? s + k : k + 1);
+new_p = t_realloc(p, s, s ? s + k : k + 1);
 if (!new_p) /* MALLOC FAILURE! */
 return (p ? free(p), -1 : -1);
 if (s)
-_strncat(new_p, buf + i, k - i);
+t_strncat(new_p, buf + i, k - i);
 else
-_strncpy(new_p, buf + i, k - i + 1);
+t_strncpy(new_p, buf + i, k - i + 1);
 s += k - i;
 i = k;
 p = new_p;
@@ -135,7 +135,7 @@ return (s);
  */
 void t_sigintHandler(__attribute__((unused))int sig_num)
 {
-_puts("\n");
+t_puts("\n");
 _puts("$ ");
 _putchar(BUF_FLUSH);
 }
