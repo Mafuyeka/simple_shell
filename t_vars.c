@@ -127,7 +127,7 @@ if (node)
 {
 replace_string(&(info->argv[i]),
 
-t_strdup(_strchr(node->str, '=') + 1));
+t_strdup(t_strchr(node->str, '=') + 1));
 
 continue;
 }
