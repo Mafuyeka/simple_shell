@@ -40,7 +40,7 @@ void t_print_error(info_t *info, char *estr)
 	t_eputs(info->fname);
 	t_eputs(": ");
 	t_print_d(info->line_count, STDERR_FILENO);
-	_eputs(": ");
+	t_eputs(": ");
 	_eputs(info->argv[0]);
 	_eputs(": ");
 	_eputs(estr);
