@@ -9,7 +9,7 @@
  */
 int t_myhistory(info_t *info)
 {
-print_list(info->history);
+t_print_list(info->history);
 return (0);
 }
 /**
@@ -23,13 +23,13 @@ int t_unset_alias(info_t *info, char *str)
 {
 char *p, c;
 int ret;
-p = _strchr(str, '=');
+p = t_strchr(str, '=');
 if (!p)
 return (1);
 c = *p;
 *p = 0;
-ret = delete_node_at_index(&(info->alias),
-get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
+ret = t_delete_node_at_index(&(info->alias),
+t_get_node_index(info->alias, t_node_starts_with(info->alias, str, -1)));
 *p = c;
 return (ret);
 }
@@ -47,9 +47,9 @@ p = _strchr(str, '=');
 if (!p)
 return (1);
 if (!*++p)
-return (unset_alias(info, str));
+return (t_set_alias(info, str));
 unset_alias(info, str);
-return (add_node_end(&(info->alias), str, 0) == NULL);
+return (t_add_node_end(&(info->alias), str, 0) == NULL);
 }
 /**
  * t_print_alias - it priints a aliaas striing
@@ -64,9 +64,9 @@ if (node)
 {
 p = _strchr(node->str, '=');
 for (a = node->str; a <= p; a++)
-_putchar(*a);
+t_putchar(*a);
 _putchar('\'');
-_puts(p + 1);
+t_puts(p + 1);
 _puts("'\n");
 return (0);
 }
@@ -88,7 +88,7 @@ if (info->argc == 1)
 node = info->alias;
 while (node)
 {
-print_alias(node);
+t_print_alias(node);
 node = node->next;
 }
 return (0);
@@ -97,9 +97,9 @@ for (i = 1; info->argv[i]; i++)
 {
 p = _strchr(info->argv[i], '=');
 if (p)
-set_alias(info, info->argv[i]);
+t_set_alias(info, info->argv[i]);
 else
 print_alias(node_starts_with(info->alias, info->argv[i], '='));
 }
-return (0)
+return (0);
 }
