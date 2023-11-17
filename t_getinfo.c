@@ -17,7 +17,7 @@ info->argc = 0;
  */
 void t_set_info(info_t *info, char **av)
 {
-int i = 0;
+char i = 0;
 info->fname = av[0];
 if (info->arg)
 {
